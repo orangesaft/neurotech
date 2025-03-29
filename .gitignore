@@ -1,0 +1,15 @@
+# Don't track your dataset
+ds004302-download/
+*.nii
+*.nii.gz
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore system files
+.DS_Store
+
+# Ignore virtual environments (if any)
+venv/
+env/
