@@ -10,19 +10,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 
 df = pd.read_csv("/Users/gwonjinlee/ds004302-download/participants.tsv", sep="\t")
-# #print(df.head())
-#
-#
-# img = nib.load("/Users/gwonjinlee/ds004302-download/sub-01/anat/sub-01_T1w.nii.gz")
-# data = img.get_fdata()
-# #print("Image shape:", data.shape)
-#
-# plt.imshow(data[:, :, data.shape[2] // 2].T, cmap="gray", origin="lower")
-# plt.title("sub-01 (Mid Slice)")
-# plt.axis("off")
-# #plt.show()
-
-
 df['psyrats'] = df['psyrats'].fillna(0)
 
 x = []
@@ -53,7 +40,7 @@ print("numpyX shape:", numpyX.shape)
 print("numpyY shape:", numpyY.shape)
 
 numpyX_train, numpyX_test, numpyY_train, numpyY_test = train_test_split(
-    numpyX, numpyY, test_size=0.3, random_state=42
+    numpyX, numpyY, test_size=0.5, random_state=42
 )
 
 dtrain = xgb.DMatrix(numpyX_train, label=numpyY_train)
@@ -76,7 +63,7 @@ evals = [(dtrain, 'train'), (dtest, 'test')]
 model = xgb.train(
     params,
     dtrain,
-    num_boost_round=100,
+    num_boost_round=300,
     evals=evals,
     early_stopping_rounds=10,
     verbose_eval=True
