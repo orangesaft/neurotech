@@ -8,7 +8,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
 
-
 df = pd.read_csv("/Users/gwonjinlee/ds004302-download/participants.tsv", sep="\t")
 df['psyrats'] = df['psyrats'].fillna(0)
 
@@ -63,9 +62,9 @@ evals = [(dtrain, 'train'), (dtest, 'test')]
 model = xgb.train(
     params,
     dtrain,
-    num_boost_round=300,
+    num_boost_round=200,
     evals=evals,
-    early_stopping_rounds=10,
+    early_stopping_rounds=20,
     verbose_eval=True
 )
 
@@ -86,5 +85,93 @@ plt.grid(True)
 plt.show()
 
 
-
-
+# ###     HC vs AVH
+# ###     HC vs AVH
+# ###     HC vs AVH
+# ###     HC vs AVH
+#
+# import os
+# import numpy as np
+# import pandas as pd
+# import nibabel as nib
+# import xgboost as xgb
+# from sklearn.model_selection import train_test_split
+# from sklearn.metrics import classification_report
+#
+# # Step 1: Load and label participants
+# df2 = pd.read_csv("/Users/gwonjinlee/ds004302-download/participants.tsv", sep="\t")
+# # df2['group'] = df2['psyrats'].replace({'AVH-': 'AVH', 'AVH+': 'AVH'}).fillna(df2['group'])
+# df2['label'] = df2['group'].apply(lambda x: 1 if x == 'AVH-' or x == 'AVH+' else 0)  # 1 = AVH, 0 = HC
+#
+# # Step 2: Extract MRI mid-slices
+# x_cls = []
+# y_cls = []
+#
+# for _, row in df2.iterrows():
+#     subject_id = row['participant_id']
+#     label = row['label']
+#
+#     try:
+#         path = f"/Users/gwonjinlee/ds004302-download/{subject_id}/anat/{subject_id}_T1w.nii.gz"
+#         img = nib.load(path)
+#         data = img.get_fdata()
+#         mid_slice = data[:, :, data.shape[2] // 2]
+#         flat_slice = mid_slice.flatten()
+#
+#         x_cls.append(flat_slice)
+#         y_cls.append(label)
+#         print(f"{subject_id} → label: {label}")  # Debug: Show what's being loaded
+#
+#     except Exception as e:
+#         print(f"Skipped {subject_id}: {e}")
+#
+# # Step 3: Convert to NumPy and filter valid labels
+# X_cls = np.array(x_cls)
+# Y_cls = np.array(y_cls)
+#
+# # Filter: Only keep 0 (HC) and 1 (AVH)
+# mask = (Y_cls == 0) | (Y_cls == 1)
+# X_cls = X_cls[mask]
+# Y_cls = Y_cls[mask]
+#
+# # Check if we still have both labels
+# unique, counts = np.unique(Y_cls, return_counts=True)
+# print("Filtered label distribution:", dict(zip(unique, counts)))
+#
+# # Step 4: Stratified train/test split
+# X_train, X_test, y_train, y_test = train_test_split(
+#     X_cls, Y_cls, test_size=0.5, random_state=42, stratify=Y_cls
+# )
+#
+# # Step 5: Convert labels to float (for XGBoost)
+# y_train = y_train.astype(float)
+# y_test = y_test.astype(float)
+#
+# # Step 6: Train with XGBoost
+# dtrain = xgb.DMatrix(X_train, label=y_train)
+# dtest = xgb.DMatrix(X_test, label=y_test)
+#
+# params_cls = {
+#     'objective': 'binary:logistic',
+#     'max_depth': 2,
+#     'eta': 0.1,
+#     'subsample': 0.8,
+#     'colsample_bytree': 0.8,
+#     'eval_metric': 'logloss',
+#     'seed': 42
+# }
+#
+# model_cls = xgb.train(
+#     params_cls,
+#     dtrain,
+#     num_boost_round=200,
+#     evals=[(dtrain, 'train'), (dtest, 'test')],
+#     early_stopping_rounds=20,
+#     verbose_eval=True
+# )
+#
+# # Step 7: Predict and evaluate
+# y_pred_proba = model_cls.predict(dtest)
+# y_pred = (y_pred_proba > 0.5).astype(int)
+#
+# print(classification_report(y_test, y_pred))
