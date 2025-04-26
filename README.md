@@ -15,7 +15,7 @@
 
 ### method 
 
-- 77 brain scans (HC, AVH-, AVH+)
+- 71 brain scans (HC, AVH-, AVH+)
 - convert MRI scan data (3D) to 1D data to be used for machine learning with XGBoost
 - compare MRI scans with PSYRATS scores (represents AVH)
 - plan to add more slices (30 slices per MRI scan) to improve machine learning, and to compensate for the loss changing 3D data to vectors
