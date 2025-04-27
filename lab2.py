@@ -56,13 +56,6 @@ Y = df['psyrats'].values
 # 58        right accumbens area
 # 60        right ventral DC
 
-#Function to count voxels for a specific region
-def extract_voxel_count_for_label(seg_path, label):
-    seg = nib.load(seg_path)
-    seg_data = seg.get_fdata().astype(np.int32)
-    count = np.sum(seg_data == label)
-    return count
-
 #Paths
 subject_paths = [
     "/Users/gwonjinlee/Downloads/MRI_Data_For_Project/sub-01/sub-01_T1w_synthseg.nii.gz",
@@ -144,31 +137,101 @@ subject_paths = [
     "/Users/gwonjinlee/Downloads/MRI_Data_For_Project/sub-77/sub-77_T1w_synthseg.nii.gz"
 ]
 
+#Function to count voxels for a specific region
+def extract_voxel_count_for_label(seg_path, label):
+    seg = nib.load(seg_path)
+    seg_data = seg.get_fdata().astype(np.int32)
+    count = np.sum(seg_data == label)
+    return count
 
-label_of_interest = 2
+def run_model(label_of_interest):
+    # Extract voxel counts
+    X = []
+    for seg_path in subject_paths:
+        voxel_count = extract_voxel_count_for_label(seg_path, label_of_interest)
+        X.append([voxel_count])
 
-# Extract voxel counts
-X = []
-for seg_path in subject_paths:
-    voxel_count = extract_voxel_count_for_label(seg_path, label_of_interest)
-    X.append([voxel_count])
+    X = np.array(X)
 
-X = np.array(X)
+    #print(X.shape)
+    #print(X)
 
-#print(X.shape)
-#print(X)
+    #Train/Test split
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-#Train/Test split
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+    #Train XGBoost
+    model = xgb.XGBRegressor()
+    model.fit(X_train, y_train)
 
-#Train XGBoost
-model = xgb.XGBRegressor()
-model.fit(X_train, y_train)
+    #Predict and evaluate
+    y_pred = model.predict(X_test)
+    print("Label of Interest:", label_of_interest)
+    print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
+    print("R² Score:", r2_score(y_test, y_pred))
+    print("")
 
-#Predict and evaluate
-y_pred = model.predict(X_test)
-print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-print("R² Score:", r2_score(y_test, y_pred))
+run_model(2)
+run_model(3)
+run_model(4)
+run_model(5)
+# run_model(6)
+run_model(7)
+run_model(8)
+# run_model(9)
+run_model(10)
+run_model(11)
+run_model(12)
+run_model(13)
+run_model(14)
+run_model(15)
+run_model(16)
+run_model(17)
+run_model(18)
+# run_model(19)
+# run_model(20)
+# run_model(21)
+# run_model(22)
+# run_model(23)
+run_model(24)
+# run_model(25)
+run_model(26)
+# run_model(27)
+run_model(28)
+# run_model(29)
+# run_model(30)
+# run_model(31)
+# run_model(32)
+# run_model(33)
+# run_model(34)
+# run_model(35)
+# run_model(36)
+# run_model(37)
+# run_model(38)
+# run_model(39)
+# run_model(40)
+run_model(41)
+run_model(42)
+run_model(43)
+run_model(44)
+# run_model(45)
+run_model(46)
+run_model(47)
+# run_model(48)
+run_model(49)
+run_model(50)
+run_model(51)
+run_model(52)
+run_model(53)
+run_model(54)
+# run_model(55)
+# run_model(56)
+# run_model(57)
+run_model(58)
+# run_model(59)
+run_model(60)
+
+
+
 
 
 
