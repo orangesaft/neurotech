@@ -1,9 +1,16 @@
 import nibabel as nib
 import numpy as np
+import pandas as pd
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
 
+df = pd.read_csv("/Users/gwonjinlee/ds004302-download/participants.tsv", sep="\t")
+df['psyrats'] = df['psyrats'].fillna(0)
 
-# df = pd.read_csv("/Users/gwonjinlee/ds004302-download/participants.tsv", sep="\t")
-# df['psyrats'] = df['psyrats'].fillna(0)
+#label = psyrats score
+Y = df['psyrats'].values
+#print(Y)
 
 #to figure out synthseg numbers in the file
 # seg = nib.load("/Users/gwonjinlee/Downloads/MRI_Data_For_Project/sub-01/sub-01_T1w_synthseg.nii.gz")
@@ -147,8 +154,20 @@ for seg_path in subject_paths:
 
 X = np.array(X)
 
-print(X.shape)
-print(X)
+#print(X.shape)
+#print(X)
+
+#Train/Test split
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+
+#Train XGBoost
+model = xgb.XGBRegressor()
+model.fit(X_train, y_train)
+
+#Predict and evaluate
+y_pred = model.predict(X_test)
+print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
+print("R² Score:", r2_score(y_test, y_pred))
 
 
 
