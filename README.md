@@ -30,6 +30,7 @@
 - used XGBoost, not a common choice for machine learning with images.
 
 # Results
+- aligns with the original research paper that the relationship between AVH and brain structure is complex and that no meaningful structural change was found.
 ## lab.py
 ![img.png](img.png)
 ## lab2.py
@@ -161,4 +162,6 @@ Label of Interest: 60
 Mean Squared Error: 312.8558090150058
 R² Score: -1.1444147026252458
 
+# Improvements
+- The original study suggests that although no meaningful structural change was found using MRI data, some meaningful insights were found using fMRI data. 
 
