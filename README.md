@@ -163,5 +163,6 @@ Mean Squared Error: 312.8558090150058
 R² Score: -1.1444147026252458
 
 # Improvements
+
 - The original study suggests that although no meaningful structural change was found using MRI data, some meaningful insights were found using fMRI data. 
 
