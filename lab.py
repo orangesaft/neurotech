@@ -7,10 +7,11 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-
+#reading the tsv file, .fillna(0) because HC should have psyrats = 0.
 df = pd.read_csv("/Users/gwonjinlee/ds004302-download/participants.tsv", sep="\t")
 df['psyrats'] = df['psyrats'].fillna(0)
 
+#feature and label
 x = []
 y = []
 
