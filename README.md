@@ -38,7 +38,7 @@ Predicting or identifying structural changes in the brains of schizophrenia pati
 
 ## Unique Aspects of This Project
 
-- **XGBoost for Neuroimaging**: Instead of using typical neuroimaging-specific methods like FSL, XGBoost was applied, an uncommon approach for structural prediction.
+- **XGBoost for Neuroimaging**: Instead of using traditional neuroimaging-specific methods like FSL, XGBoost was applied, an unconventional and innovative approach for MRI data analysis.
 
 ---
 
