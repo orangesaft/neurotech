@@ -1,4 +1,4 @@
-# Neurotech: Predicting Brain Structural Changes in Schizophrenia Patients with AVH
+# Neurotech: Predicting Structural Changes in the Brains of Schizophrenia Patients Experiencing AVH
 
 ## Project Overview
 This project analyzes neuroimaging data (MRI) to investigate potential structural brain changes in schizophrenia patients experiencing auditory verbal hallucinations (AVH). Using machine learning techniques, the project replicates and builds upon findings from published research, with a unique methodological approach.
