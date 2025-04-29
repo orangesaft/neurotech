@@ -14,7 +14,7 @@ The project was originally developed with the aim of presenting at the 2025 Cali
 ---
 
 ## Topic
-Predicting or identifying structural brain changes in schizophrenia patients with AVH using MRI data and machine learning.
+Predicting or identifying structural changes in the brains of schizophrenia patients with AVH using MRI data and machine learning.
 
 ---
 
