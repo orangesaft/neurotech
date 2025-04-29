@@ -1,7 +1,7 @@
 # Neurotech: Predicting Structural Changes in the Brains of Schizophrenia Patients Experiencing AVH
 
 ## Project Overview
-This project analyzes neuroimaging data (MRI) to investigate potential structural brain changes in schizophrenia patients experiencing auditory verbal hallucinations (AVH). Using machine learning techniques, the project replicates and builds upon findings from published research, with a unique methodological approach.
+This project analyzes neuroimaging data (MRI) to investigate potential structural changes in the brains of schizophrenia patients experiencing auditory verbal hallucinations (AVH). Using machine learning techniques, the project replicates and builds upon findings from published research, with a unique methodological approach.
 
 The project was originally developed with the aim of presenting at the 2025 California Neurotech Conference at UCSD, although it was not ultimately submitted.
 
@@ -26,6 +26,7 @@ Predicting or identifying structural brain changes in schizophrenia patients wit
   - Took the middle slice of each MRI scans (3D) and flattened into 1D arrays to serve as input for machine learning.
   - Models were trained using **XGBoost**.
   - Target variable: **PSYRATS scores**, representing AVH severity.
+  - Regression model was developed.
 
 ### lab2.py
 - **Additional Processing**:
@@ -36,16 +37,16 @@ Predicting or identifying structural brain changes in schizophrenia patients wit
 ---
 
 ## Unique Aspects of This Project
-- **No use of FSL**: The original study used FSL for data preprocessing; this project entirely bypassed it.
-- **XGBoost for Neuroimaging**: Instead of using convolutional neural networks (CNNs) or more typical neuroimaging-specific methods, XGBoost was applied, an uncommon but interpretable choice for structural prediction.
+
+- **XGBoost for Neuroimaging**: Instead of using typical neuroimaging-specific methods like FSL, XGBoost was applied, an uncommon approach for structural prediction.
 
 ---
 
 ## Results
 
 ### Overall Findings
-- Results align with the original research: **the relationship between AVH and brain structure is complex and no strong structural signatures were detected via MRI**.
-
+- Results align with the original research: **the relationship between AVH and brain structure is complex and no strong structural differences were detected in MRI scans**.
+- By reaching the same conclusion through a different methodological approach, this project further reinforces the findings of the original study, highlighting the complexity of human brain and schizophrenia.
 ---
 
 ### lab.py Results
@@ -76,7 +77,7 @@ _(Full table available in the code or result files.)_
 
 ## Improvements and Future Directions
 - The original study indicated that while **MRI data did not reveal meaningful structural differences**, **fMRI (functional MRI)** data showed more promising findings.
-- Future work could extend this project by incorporating **functional imaging modalities** to better capture dynamic brain activity related to AVH.
+- Future work could extend this project by including fMRI data to better capture dynamic brain activity associated with AVH.
 
 ---
 
